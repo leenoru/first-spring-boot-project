@@ -1,6 +1,8 @@
 package com.playdata.springbootprojectre.web;
 
+import com.playdata.springbootprojectre.config.auth.SessionUser;
 import com.playdata.springbootprojectre.service.PostsService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +14,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class indexController {
     private final PostsService postsService;
+    private final HttpSession httpSession;
+
     @GetMapping("/")
     public String index(Model model) {
         // Model: 서버 템플릿 엔진에서 사용할 수 있는 객체를 저장할 수 있다.
         model.addAttribute("posts", postsService.findAllDesc());
+
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        if (user!= null) {
+            model.addAttribute("username", user.getName());
+        }
+
         return "index"; // /src/main/resources/templates/ + "index" + .mustache 를 viewresolver가 완성해줌
     }
     @GetMapping("/posts/save")
