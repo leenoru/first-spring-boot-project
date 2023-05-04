@@ -1,12 +1,16 @@
 package com.playdata.springbootprojectre.service;
 
-import com.playdata.springbootprojectre.domain.Posts;
-import com.playdata.springbootprojectre.domain.PostsRepository;
+import com.playdata.springbootprojectre.domain.posts.Posts;
+import com.playdata.springbootprojectre.domain.posts.PostsRepository;
+import com.playdata.springbootprojectre.web.dto.PostsListResponseDto;
 import com.playdata.springbootprojectre.web.dto.PostsSaveRequestDto;
 import com.playdata.springbootprojectre.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service // component를 담고 있기 때문에 자동으로 Bean을 생성해준다.
@@ -30,5 +34,17 @@ public class PostsService {
         Posts posts = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글을 찾을 수 없습니다. id=" + id));
         return new PostsResponseDto(posts);
+    }
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc().stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
+    }
+    @Transactional
+    public void delete(Long id) {
+        Posts posts = postsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글을 찾을 수 없습니다." + id));
+        postsRepository.delete(posts);
     }
 }

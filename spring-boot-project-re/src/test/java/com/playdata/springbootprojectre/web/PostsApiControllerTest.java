@@ -1,7 +1,7 @@
 package com.playdata.springbootprojectre.web;
 
-import com.playdata.springbootprojectre.domain.Posts;
-import com.playdata.springbootprojectre.domain.PostsRepository;
+import com.playdata.springbootprojectre.domain.posts.Posts;
+import com.playdata.springbootprojectre.domain.posts.PostsRepository;
 import com.playdata.springbootprojectre.web.dto.PostsSaveRequestDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;

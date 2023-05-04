@@ -1,6 +1,6 @@
 package com.playdata.springbootprojectre.web.dto;
 
-import com.playdata.springbootprojectre.domain.Posts;
+import com.playdata.springbootprojectre.domain.posts.Posts;
 import lombok.Getter;
 
 @Getter

@@ -1,5 +1,6 @@
-package com.playdata.springbootprojectre.domain;
+package com.playdata.springbootprojectre.domain.posts;
 
+import com.playdata.springbootprojectre.domain.AuditingEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Posts {
+public class Posts extends AuditingEntity {
 
     @Id //PK
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto-increment

@@ -1,4 +1,4 @@
-package com.playdata.springbootprojectre.web.dto;
+package com.playdata.springbootprojectre.web;
 
 import com.playdata.springbootprojectre.service.PostsService;
 import com.playdata.springbootprojectre.web.dto.PostsResponseDto;
@@ -24,5 +24,11 @@ public class PostsApiController {
     @GetMapping("/api/v1/posts/{id}")
     public PostsResponseDto findById(@PathVariable Long id){
         return postsService.findById(id);
+    }
+
+    @DeleteMapping("/api/v1/posts/{id}")
+    public Long delete(@PathVariable Long id){
+        postsService.delete(id);
+        return id;
     }
 }
